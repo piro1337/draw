@@ -9,7 +9,6 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.File;
 
 public class SettingSave implements MouseListener,MouseMotionListener{
     DrawCanvas dc;
@@ -19,6 +18,7 @@ public class SettingSave implements MouseListener,MouseMotionListener{
     int saveButtonSizeW = 60;
     int saveButtonSizeH = 30;
     boolean saveButton = false;
+    int filecnt = 1;
 
     public SettingSave(JPanel jp,DrawCanvas dc){
         this.dc = dc;
@@ -57,27 +57,30 @@ public class SettingSave implements MouseListener,MouseMotionListener{
     public void mouseClicked(MouseEvent e) {
         if(saveButton){
             saveButton = false;
-            File defaultFile = new File("paint.png");
+            // File defaultFile = new File("paint.png");
             jp.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));   //ダイアログが表示されるまで待ち状態のカーソルに変更
-            JFileChooser filechooser = new JFileChooser();
-            filechooser.setSelectedFile(defaultFile);
-            int selected = filechooser.showSaveDialog(dc);
+            dc.savePNG("save/paint"+filecnt+".png");
             jp.setCursor(null);
-            if (selected == JFileChooser.APPROVE_OPTION){
-                File file = filechooser.getSelectedFile();
-                String fileName = file.getName();
-                System.out.println(fileName);
-                int fileType = Util.filecheck(file);//戻り値が0は無効な名前。1はpng、2はjpg
-                if(fileType==1){
-                    dc.savePNG(file.getAbsolutePath());
-                }else if(fileType==2){
-                    dc.saveJPG(file.getAbsolutePath());
-                }else{
-                    JOptionPane.showMessageDialog(dc, "拡張子は.pngと.jpgのみ有効です");
-                }
-            }else if (selected == JFileChooser.CANCEL_OPTION){
+            filecnt++;
+            // JFileChooser filechooser = new JFileChooser();
+            // filechooser.setSelectedFile(defaultFile);
+            // int selected = filechooser.showSaveDialog(dc);
+            // jp.setCursor(null);
+            // if (selected == JFileChooser.APPROVE_OPTION){
+            //     File file = filechooser.getSelectedFile();
+            //     String fileName = file.getName();
+            //     System.out.println(fileName);
+            //     int fileType = Util.filecheck(file);//戻り値が0は無効な名前。1はpng、2はjpg
+            //     if(fileType==1){
+            //         dc.savePNG(file.getAbsolutePath());
+            //     }else if(fileType==2){
+            //         dc.saveJPG(file.getAbsolutePath());
+            //     }else{
+            //         JOptionPane.showMessageDialog(dc, "拡張子は.pngと.jpgのみ有効です");
+            //     }
+            // }else if (selected == JFileChooser.CANCEL_OPTION){
                 
-            }
+            // }
         }
     }
 

@@ -34,7 +34,7 @@ public class SettingOpen implements MouseListener, MouseMotionListener{
             g2.fillRect(openButtonX, openButtonY, openButtonSizeW, openButtonSizeH);
         }
         g2.setColor(Color.white);
-        g2.drawString("OPEN", openButtonX+13, openButtonY+20);
+        g2.drawString("CLEAR", openButtonX+13, openButtonY+20);
     }
 
     @Override
@@ -56,20 +56,21 @@ public class SettingOpen implements MouseListener, MouseMotionListener{
     public void mouseClicked(MouseEvent e) {
         if(openButton){
             openButton = false;
-            jp.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));   //ダイアログが表示されるまで待ち状態のカーソルに変更
-            JFileChooser filechooser = new JFileChooser();
-            int selected = filechooser.showOpenDialog(dc);
-            jp.setCursor(null);
-            if (selected == JFileChooser.APPROVE_OPTION){
-                File file = filechooser.getSelectedFile();
-                //String fileName = file.getName();
-                int fileType = Util.filecheck(file);//戻り値が0は無効な名前。1はpng、2はjpg
-                if(fileType==0){
-                    JOptionPane.showMessageDialog(dc, "拡張子は.pngと.jpgのみ有効です");
-                }else{
-                    dc.openFile(file.getAbsolutePath());
-                }
-            }
+            dc.openFile("");
+            // jp.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));   //ダイアログが表示されるまで待ち状態のカーソルに変更
+            // JFileChooser filechooser = new JFileChooser();
+            // int selected = filechooser.showOpenDialog(dc);
+            // jp.setCursor(null);
+            // if (selected == JFileChooser.APPROVE_OPTION){
+            //     File file = filechooser.getSelectedFile();
+            //     //String fileName = file.getName();
+            //     int fileType = Util.filecheck(file);//戻り値が0は無効な名前。1はpng、2はjpg
+            //     if(fileType==0){
+            //         JOptionPane.showMessageDialog(dc, "拡張子は.pngと.jpgのみ有効です");
+            //     }else{
+            //         dc.openFile(file.getAbsolutePath());
+            //     }
+            // }
         }
     }
 

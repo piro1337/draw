@@ -217,6 +217,8 @@ public class DrawCanvas extends JPanel implements MouseListener,MouseMotionListe
 	public void savePNG(String fileName){
 		try{
 			ImageIO.write(img, "png", new File(fileName));
+			
+			JOptionPane.showMessageDialog(this, "保存が完了しました。Thank you!");
 			} catch (Exception ex) {
 	
 			// ファイルの入出力でエラーになった場合
@@ -238,14 +240,16 @@ public class DrawCanvas extends JPanel implements MouseListener,MouseMotionListe
 
 	public void openFile(String fileName){
 		try{
-			hozonimg[imgIndex] = deepCopy(img);
-			imgIndex++;
-			if(imgIndex==hozonimg.length)imgIndex=0;
-			BufferedImage bufferedImage = ImageIO.read(new File(fileName));
+			// hozonimg[imgIndex] = deepCopy(img);
+			// imgIndex++;
+			// if(imgIndex==hozonimg.length)imgIndex=0;
+			// BufferedImage bufferedImage = ImageIO.read(new File(fileName));
 			Toolkit tk = getToolkit();
 			Dimension dim = tk.getScreenSize();
-			System.out.println(bufferedImage.getTileHeight());
-			g2.drawImage(bufferedImage, 0,0,dim.width-100,dim.height-100,null);
+			// System.out.println(bufferedImage.getTileHeight());
+			g2.setColor(Color.WHITE);
+			g2.fillRect(0, 0, dim.width, dim.height);
+			g2.setColor(Color.BLACK);
 			repaint();
 		}catch(Exception ex){
 			// ファイルの入出力でエラーになった場合
